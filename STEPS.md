@@ -13,4 +13,5 @@
     8. Pick `YES` for open-source app
 5. git add -A
 6. git commit -m"Initial files from dev init"
-7. 
+7. dev up
+8. 
