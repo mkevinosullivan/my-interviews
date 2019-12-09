@@ -13,3 +13,10 @@ questions = Question.create([
   { question: 'How have you grown personally during the time you were completing your degree(s)?  How do you plan on continuing your learning as you move into a full-time job?'},
   { question: 'Are there any questions you anticipated us asking today or any additional details or comments about yourself that you would like to share with us?'},
 ])
+
+candidates = Candidate.create([
+  { first_name: 'Bob', last_name: 'Newhart', email: 'bob.newhart@yahoo.com' },
+  { first_name: 'Mike', last_name: 'Tester', email: 'mike@gmail.com' },
+  { first_name: 'Suzanne', last_name: 'Richards', email: 'suzanne@outlook.com' },
+  { first_name: 'Ann', last_name: 'Pinovsky', email: 'apinovsk@email.net' },
+])

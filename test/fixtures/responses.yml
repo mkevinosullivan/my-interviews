@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  response: This is the response for the first question
+  score: 1
+
+two:
+  response: This is the response for another question
+  score: 5

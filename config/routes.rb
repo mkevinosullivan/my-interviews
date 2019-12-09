@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :responses
+  resources :candidates
   resources :questions
 
   # For details on the DSL available within this file,
