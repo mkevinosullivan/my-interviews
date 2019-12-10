@@ -6,6 +6,6 @@ class Response < ApplicationRecord
   validates :score, presence: true
 
   def to_s
-    "response [#{response}], score [#{score}]"
+    "response [#{response}], score [#{score}], candidate_id [#{candidate_id}], question_id [#{question_id}]"
   end
 end

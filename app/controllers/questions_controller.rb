@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
+    # puts "## DEBUG ## [" + params.to_s + "]"
     @questions = Question.all
   end
 
