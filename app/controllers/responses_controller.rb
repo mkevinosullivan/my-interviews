@@ -34,7 +34,7 @@ class ResponsesController < ApplicationController
       puts "## DEBUG - response_data ## [" + response_data.to_s + "]"
       response = Response.new(response_data)
       puts "## DEBUG - response, after Response.new ## [" + response.to_s + "]"
-      all_saved = response.save!
+      all_saved = all_saved && response.save!
     end
 
     if all_saved
