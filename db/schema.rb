@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_09_165141) do
+ActiveRecord::Schema.define(version: 2019_12_10_171056) do
 
   create_table "candidates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "first_name", null: false
@@ -19,6 +19,19 @@ ActiveRecord::Schema.define(version: 2019_12_09_165141) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_candidates_on_email"
+  end
+
+  create_table "questionnaires", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "questionnaires_questions", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "questionnaire_id"
+    t.bigint "question_id"
+    t.index ["question_id"], name: "index_questionnaires_questions_on_question_id"
+    t.index ["questionnaire_id"], name: "index_questionnaires_questions_on_questionnaire_id"
   end
 
   create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

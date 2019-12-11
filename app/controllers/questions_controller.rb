@@ -8,6 +8,13 @@ class QuestionsController < ApplicationController
     @questions = Question.all
   end
 
+  # GET /interview
+  def interview
+    # puts "## DEBUG ## [" + params.to_s + "]"
+    @questions = Question.all
+    @candidate = Candidate.find(params[:candidate_id])
+  end
+
   # GET /questions/1
   # GET /questions/1.json
   def show

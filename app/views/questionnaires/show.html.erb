@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @questionnaire.description %>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">
+          Questions
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @questions.each_with_index do |question, index| %>
+      <tr>
+        <td><%= index+1 %>.</td>
+        <td><%= question.question %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>
+
+<%= link_to 'Edit', edit_questionnaire_path(@questionnaire) %> |
+<%= link_to 'Back', questionnaires_path %>

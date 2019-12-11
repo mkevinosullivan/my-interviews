@@ -6,17 +6,19 @@
   <thead>
     <tr>
       <th>Candidate</th>
-      <th></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @candidates.each do |candidate| %>
       <tr>
-        <td><%= candidate.first_name %> <%= candidate.last_name %> (<%= candidate.email %>)</td>
+        <td><%= link_to format('%s %s (%s)', candidate.first_name, candidate.last_name, candidate.email), candidate %></td>
+        <td><%= link_to 'Edit', edit_candidate_path(candidate) %></td>
+        <td><%= link_to 'Destroy', candidate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td>
           <% if @candidates.joins(:responses).find_by('responses.candidate_id' => candidate.id).blank? %>
-            <%= link_to 'Start interview', questions_path(candidate_id: candidate.id) %>
+            <%= link_to 'Start interview', interview_path(candidate_id: candidate.id) %>
           <% else %>
             Interview complete
           <% end %>
@@ -27,3 +29,5 @@
 </table>
 
 <br>
+
+<%= link_to 'New Candidate', new_candidate_path %>
