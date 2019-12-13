@@ -32,7 +32,7 @@
                   candidate_id: candidate.id,
                   job_posting_id: @job_posting.id) %>
             <% else %>
-              Interview complete
+              Interview complete (<%= link_to 'review', list_responses_path(candidate_id: candidate.id, job_posting_id: @job_posting.id) %>)
             <% end %>
           </td>
         </tr>
