@@ -18,6 +18,15 @@ class JobPostingsController < ApplicationController
     @job_posting = JobPosting.new
     @questionnaires = Questionnaire.all
     @current_questionnaire = nil
+
+    puts "###"
+    puts "### DEBUG" + params.to_s
+    puts "### questionnaires.size = " + (@questionnaires ? @questionnaires.size.to_s : "[no questionnaires]")
+    puts "###"
+
+    if @questionnaires.size == 0
+      redirect_to questionnaires_url, notice: "Please create a questionnaire before creating a job posting."
+    end
   end
 
   # GET /job_postings/1/edit

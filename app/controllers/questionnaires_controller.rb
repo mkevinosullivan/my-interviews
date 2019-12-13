@@ -16,6 +16,18 @@ class QuestionnairesController < ApplicationController
   # GET /questionnaires/new
   def new
     @questionnaire = Questionnaire.new
+
+    @questions = Question.all
+
+    puts "###"
+    puts "### DEBUG" + params.to_s
+    puts "### questionnaires.size = " + (@questions ? @questions.size.to_s : "[no questions]")
+    puts "###"
+
+    if @questions.size == 0
+      redirect_to questions_url, notice: "Please create at least one question before creating a questionnaire."
+    end
+
   end
 
   # GET /questionnaires/1/edit
@@ -46,12 +58,13 @@ class QuestionnairesController < ApplicationController
     puts "###"
     
     question_ids = []
-    questions_params.each do |question_id|
-      question_ids << question_id.to_i
+    if questions_params
+      questions_params.each do |question_id|
+        question_ids << question_id.to_i
+      end
     end
 
     questionnaire_saved = @questionnaire.update(questionnaire_params)
-
     @questionnaire.question_ids = question_ids
 
     if questionnaire_saved
@@ -83,9 +96,13 @@ class QuestionnairesController < ApplicationController
     end
 
     def questions_params
-      params.require(:questions)
+      begin
+        params.require(:questions)
+      rescue ActionController::ParameterMissing
+        nil
+      end
     end
-    
+
     def set_edit_params
       @questions_included = @questionnaire.questions
       @other_questions = Question.where.not(id: @questions_included.pluck(:id))

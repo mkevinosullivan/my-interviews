@@ -21,6 +21,13 @@ class ResponsesController < ApplicationController
   def edit
   end
 
+  # GET /responses/list
+  def list
+    @candidate = Candidate.find(params[:candidate_id])
+    @job_posting = JobPosting.find(params[:job_posting_id])
+    @responses = Response.where(candidate_id: @candidate.id, job_posting_id: @job_posting.id)
+  end
+
   # POST /responses
   # POST /responses.json
   def create

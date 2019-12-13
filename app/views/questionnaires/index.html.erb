@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Description</th>
+      <th>Description (# questions)</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,7 +13,7 @@
   <tbody>
     <% @questionnaires.each do |questionnaire| %>
       <tr>
-        <td><%= questionnaire.description %></td>
+        <td><%= questionnaire.description %> (<%= questionnaire.questions.size %>)</td>
         <td><%= link_to 'Show', questionnaire %></td>
         <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire) %></td>
         <td><%= link_to 'Destroy', questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>

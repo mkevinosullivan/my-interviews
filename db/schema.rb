@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 2019_12_11_173040) do
     t.index ["questionnaire_id"], name: "index_job_postings_on_questionnaire_id"
   end
 
-  create_table "job_postings_candidates", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "candidates_job_postings", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "job_posting_id"
     t.bigint "candidate_id"
-    t.index ["candidate_id"], name: "index_job_postings_candidates_on_candidate_id"
-    t.index ["job_posting_id"], name: "index_job_postings_candidates_on_job_posting_id"
+    t.index ["candidate_id"], name: "index_candidates_job_postings_on_candidate_id"
+    t.index ["job_posting_id"], name: "index_candidates_job_postings_on_job_posting_id"
   end
 
   create_table "questionnaires", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

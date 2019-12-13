@@ -14,11 +14,18 @@
     </thead>
 
     <tbody>
-      <% @questions.each_with_index do |question, index| %>
-      <tr>
-        <td><%= index+1 %>.</td>
-        <td><%= question.question %></td>
-      </tr>
+      <% if @questions.size > 0 %>
+        <% @questions.each_with_index do |question, index| %>
+        <tr>
+          <td><%= index+1 %>.</td>
+          <td><%= question.question %></td>
+        </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td>There are no questions linked to this questionnaire.<br>Please add some questions.</td>
+          <td></td>
+        </tr>
       <% end %>
     </tbody>
   </table>

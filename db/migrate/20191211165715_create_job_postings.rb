@@ -1,7 +1,7 @@
 class CreateJobPostings < ActiveRecord::Migration[6.0]
   def change
     create_table :job_postings do |t|
-      t.text :description
+      t.text :description, null: false
       t.string :posting_link
 
       t.belongs_to :questionnaire
