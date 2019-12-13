@@ -38,9 +38,9 @@ class ResponsesController < ApplicationController
     end
 
     if all_saved
-      redirect_to candidates_path, notice: 'Response(s) were successfully saved.'
+      redirect_to job_posting_path(id: params[:job_posting_id]), notice: 'Response(s) were successfully saved.'
     else
-      redirect_to questions_path(candidate_id: params[:candidate_id])
+      redirect_to interview_path(candidate_id: params[:candidate_id], job_posting_id: params[:job_posting_id])
     end
   end
 
@@ -83,13 +83,15 @@ class ResponsesController < ApplicationController
       # puts "## DEBUG ## [" + params.to_s + "]"
       responses = []
 
-      puts "## DEBUG ## [" + (params[:question_count].to_i-1).to_s + "]"
-      (params[:question_count].to_i-1).times do |index|
+      puts "## DEBUG ## [" + (params[:question_count].to_i).to_s + "]"
+      (params[:question_count].to_i).times do |index|
+        puts "## DEBUG - extract_responses, iteration index [#{index}] ##"
         responses << {
           response: params['response-'+index.to_s],
           score: params['score-'+index.to_s],
           question_id: params['question_id-'+index.to_s],
-          candidate_id: params[:candidate_id]
+          candidate_id: params[:candidate_id],
+          job_posting_id: params[:job_posting_id]
         }
       end
 

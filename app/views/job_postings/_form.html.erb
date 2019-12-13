@@ -1,0 +1,49 @@
+<%= form_with(model: job_posting, local: true) do |form| %>
+  <% if job_posting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job_posting.errors.count, "error") %> prohibited this job_posting from being saved:</h2>
+
+      <ul>
+        <% job_posting.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :posting_link %>
+    <%= form.text_field :posting_link %>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="3">Available Questionnaires</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% questionnaires.each do |questionnaire| %>
+        <tr>
+          <% if current_questionnaire_id && questionnaire.id == current_questionnaire_id %>
+            <td><%= form.radio_button :questionnaire_id, questionnaire.id, checked: true %></td>
+          <% else %>
+            <td><%= form.radio_button :questionnaire_id, questionnaire.id %></td>
+          <% end %>
+          <td><%= questionnaire.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+

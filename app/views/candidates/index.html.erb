@@ -13,16 +13,10 @@
   <tbody>
     <% @candidates.each do |candidate| %>
       <tr>
-        <td><%= link_to format('%s %s (%s)', candidate.first_name, candidate.last_name, candidate.email), candidate %></td>
+        <td><%= format('%s %s (%s)', candidate.first_name, candidate.last_name, candidate.email) %></td>
+        <td><%= link_to 'Show', candidate %></td>
         <td><%= link_to 'Edit', edit_candidate_path(candidate) %></td>
         <td><%= link_to 'Destroy', candidate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td>
-          <% if @candidates.joins(:responses).find_by('responses.candidate_id' => candidate.id).blank? %>
-            <%= link_to 'Start interview', interview_path(candidate_id: candidate.id) %>
-          <% else %>
-            Interview complete
-          <% end %>
-        </td>
       </tr>
     <% end %>
   </tbody>

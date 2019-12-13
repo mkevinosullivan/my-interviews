@@ -1,0 +1,85 @@
+<p id="notice"><%= notice %></p>
+
+<% submit_button_desc = 'Add candidates to job posting' %>
+
+<%= form_with(model: @job_posting, url: set_candidates_path, method: :post, local: true) do %>
+  <% if @job_posting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@job_posting.errors.count, "error") %> prohibited this job posting from being saved:</h2>
+
+      <ul>
+        <% @job_posting.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <strong>Description:</strong>
+    <br>
+    <%= @job_posting.description %>
+    <br>
+    <%= link_to 'Job posting link', @job_posting.posting_link %>
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">
+          Candidates already included
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @current_candidates.size > 0 %>
+        <% submit_button_desc = 'Update candidates to job posting' %>
+        <% @current_candidates.each do |candidate| %>
+          <tr>
+            <td><%= check_box_tag('candidates[]', candidate.id, true) %></td>
+            <td><%= format('%s %s (%s)', candidate.first_name, candidate.last_name, candidate.email) %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td>No candidates selected.</td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">
+          Candidates available
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @other_candidates.size > 0 %>
+        <% @other_candidates.each do |candidate| %>
+        <tr>
+          <td><%= check_box_tag('candidates[]', candidate.id) %></td>
+          <td><%= format('%s %s (%s)', candidate.first_name, candidate.last_name, candidate.email) %></td>
+        </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td>(no candidates to select)</td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <%= submit_tag(submit_button_desc) %>
+  </div>
+<% end %>
+
+<%= link_to 'Edit', edit_job_posting_path(@job_posting) %> |
+<%= link_to 'Back', job_postings_path %>

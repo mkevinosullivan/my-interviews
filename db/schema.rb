@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_10_171056) do
+ActiveRecord::Schema.define(version: 2019_12_11_173040) do
 
   create_table "candidates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "first_name", null: false
@@ -19,6 +19,22 @@ ActiveRecord::Schema.define(version: 2019_12_10_171056) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_candidates_on_email"
+  end
+
+  create_table "job_postings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.text "description"
+    t.string "posting_link"
+    t.bigint "questionnaire_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["questionnaire_id"], name: "index_job_postings_on_questionnaire_id"
+  end
+
+  create_table "job_postings_candidates", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "job_posting_id"
+    t.bigint "candidate_id"
+    t.index ["candidate_id"], name: "index_job_postings_candidates_on_candidate_id"
+    t.index ["job_posting_id"], name: "index_job_postings_candidates_on_job_posting_id"
   end
 
   create_table "questionnaires", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -47,7 +63,9 @@ ActiveRecord::Schema.define(version: 2019_12_10_171056) do
     t.bigint "question_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "job_posting_id"
     t.index ["candidate_id"], name: "index_responses_on_candidate_id"
+    t.index ["job_posting_id"], name: "index_responses_on_job_posting_id"
     t.index ["question_id"], name: "index_responses_on_question_id"
   end
 
