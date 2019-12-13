@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <br>
+  <%= @job_posting.description %>
+  <br>
+  <%= link_to 'Job posting link', @job_posting.posting_link %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Candidates</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @current_candidates.size > 0 %>
+      <% @current_candidates.each do |candidate| %>
+        <tr>
+          <td><%= format('%s %s (%s)',
+                    candidate.first_name,
+                    candidate.last_name,
+                    candidate.email) %></td>
+          <td>
+            <% if Response.find_by(
+                  candidate_id: candidate.id,
+                  job_posting_id: @job_posting.id).blank? %>
+              <%= link_to 'Start interview', interview_path(
+                  candidate_id: candidate.id,
+                  job_posting_id: @job_posting.id) %>
+            <% else %>
+              Interview complete
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td>No candidates added to this job posting.</td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Edit', edit_job_posting_path(@job_posting) %> |
+<%= link_to 'Back', job_postings_path %>

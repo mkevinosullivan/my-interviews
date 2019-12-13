@@ -1,7 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Questions for <%= @candidate.first_name %> <%= @candidate.last_name %></h1>
-<%= form_with(url: "/responses", method: "post") do %>
+<h2>(for job posting)</h2>
+<p>
+  <strong>Description:</strong>
+  <br>
+  <%= @job_posting.description %>
+  <br>
+  <%= link_to 'Job posting link', @job_posting.posting_link %>
+</p>
+
+<%= form_with(url: responses_path, method: :post) do %>
 <table>
   <thead>
     <tr>
@@ -30,7 +39,8 @@
       <% end %>  <%# end of @questions.each_with_index do %>
       <tr>
         <td colspan="2">
-          <%= hidden_field_tag(:candidate_id, params[:candidate_id]) %>
+          <%= hidden_field_tag(:candidate_id, @candidate.id) %>
+          <%= hidden_field_tag(:job_posting_id, @job_posting.id) %>
           <%= hidden_field_tag(:question_count, @questions.size) %>
           <%= submit_tag('Submit responses and scores') %>
         </td>

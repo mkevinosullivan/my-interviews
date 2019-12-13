@@ -102,5 +102,72 @@
 - Update content of `test/fixtures/responses.yml`
 - `$ bin/rails test test/controllers/responses_controller_test.rb` - should pass, but don't - getting `NoMethodError: undefined method 'response' for nil:NilClass` for `create` and `update`
 
+### Building `Questionnaire` MVC
+- `$ bin/rails generate scaffold Questionnaire description:text`
+- Edit `app/models/questionnaire.rb` to include `has_and_belongs_to_many :questions`
+- Edit `app/models/question.rb` to include `has_and_belongs_to_many :questionnaires`
+- Edit `NNN_create_questionnaires.rb` to look like this
+  ```
+  class CreateQuestionnaires < ActiveRecord::Migration[6.0]
+    def change
+      create_table :questionnaires do |t|
+        t.text :description
+
+        t.timestamps
+      end
+
+      create_table :questionnaires_questions, id: false do |t|
+        t.belongs_to :questionnaire
+        t.belongs_to :question
+      end
+    end
+  end
+  ```
+- `$ bin/rails db:migrate`
+
+### Building `JobPosting` MVC
+- `$ bin/rails generate scaffold JobPosting description:text posting_link:string`
+- Edit `app/models/jobposting.rb` to include
+  ```
+  has_one :questionnaire
+  has_many :candidates
+  ```
+- Edit `NNN_create_job_postings.rb` to look like this
+  ```
+  class CreateJobPostings < ActiveRecord::Migration[6.0]
+    def change
+      create_table :job_postings do |t|
+        t.text :description
+        t.string :posting_link
+
+        t.belongs_to :questionnaire
+
+        t.timestamps
+      end
+
+      create_table :candidates_job_postings, id: false do |t|
+        t.belongs_to :job_posting
+        t.belongs_to :candidate
+      end
+    end
+  end
+  ```
+- `$ bin/rails db:migrate`
+  - NB: to rollback the last migration, simply run `$ bin/rails db:rollback`.  There was an error in the initial version of the file above, so needed to do this!
+- Edit `app/models/response.rb` to include `has_one :job_posting`
+- `$ bin/rails generate migration AddJobPostingToResponses`
+- Edit `NNN_add_job_posting_to_responses.rb` to look like this
+  ```
+  class AddJobPostingToResponses < ActiveRecord::Migration[6.0]
+    def change
+      change_table :responses do |t|
+        t.belongs_to :job_posting
+      end
+    end
+  end
+  ```
+- `$ bin/rails db:migrate`
+
+
 ### Some references
 [Rails building json API responses with JBuilder](https://rubyinrails.com/2018/11/10/rails-building-json-api-resopnses-with-jbuilder/)

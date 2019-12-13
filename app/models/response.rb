@@ -1,6 +1,7 @@
 class Response < ApplicationRecord
   belongs_to :candidate
   has_one :question
+  has_one :job_posting
 
   validates :response, presence: true
   validates :score, presence: true

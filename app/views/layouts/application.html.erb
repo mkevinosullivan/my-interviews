@@ -10,6 +10,18 @@
   </head>
 
   <body>
-    <%= yield %>
+    <table style="width: 100%">
+      <tr>
+        <td style="width: 100px; border-right: 1px solid gray; vertical-align: top">
+          <%= link_to 'Job Postings', job_postings_path %>
+          <%= link_to 'Questionnaires', questionnaires_path %>
+          <%= link_to 'Questions', questions_path %>
+          <%= link_to 'Candidates', candidates_path %>
+        </td>
+        <td style="vertical-align: top">
+          <%= yield %>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
