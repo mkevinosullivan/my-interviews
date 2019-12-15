@@ -25,17 +25,25 @@
   - **responses** now includes reference to originating job posting
 
 
-- [ ] ***Prepare code for initial review*** (branch: `prep-for-review-1`)
+- [x] ***Prepare code for initial review*** (branch: `prep-for-review-1`)
   - Update `README` document to describe application, and its intent.  Add a `Setup` section.
   - Add a document to list previous and planned sprints (this doc)
-  - Update the `db/seeds.rb` file so that an initial download of this branch could be setup by third party and played with out-of-the-box
   - Test a clean download of the repo and setup instructions
+
+
+- [ ] ***Add Bootstrap and "pretty-up" application*** (branch: `add-bootstrap`)
+  - Add a navbar with logo
+  - Add styles to form elements, buttons, menus, etc.
 
 ### Planned (not necessarily in this order)
 - [ ] ***Upload file of candidates with job posting*** (branch: `upload-candidates-to-job-posting`)
   - When creating a job posting, at the select candidates step, include option to upload a comma-separated-variable (CSV) file of candidates and link them to that job posting
   - In the general list of candidates page (not via job posting), allow upload of a CSV file of candidates
   - format of CSV file: `first_name, last_name, email`
+
+
+- [ ] ***Refactor code to use more partials and helpers*** (branch: `add-partials-helpers`)
+  - Move code from the views into helpers and/or partials
 
 
 - [ ] ***Add new question when creating/updating a questionnaire*** (branch: `add-new-question-to-questionnaire`)
@@ -46,11 +54,6 @@
 - [ ] ***Add new questionnaire when creating/updating a job posting*** (branch: `add-new-questionnaire-to-job-posting`)
   - Currently, when creating or updating a job posting, can only select from existing questionnaires
   - Add ability to create a new questionnaire and automatically associate with job posting
-
-
-- [ ] ***Add Bootstrap and "pretty-up" application*** (branch: `add-bootstrap`)
-  - Add a navbar with logo
-  - Add styles to form elements, buttons, menus, etc.
 
 
 - [ ] ***Add rules around record changes*** (branch: `add-biz-rules`)

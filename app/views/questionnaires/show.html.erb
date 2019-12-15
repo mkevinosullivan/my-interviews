@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Description:</strong>
   <%= @questionnaire.description %>
@@ -31,5 +29,6 @@
   </table>
 </p>
 
-<%= link_to 'Edit', edit_questionnaire_path(@questionnaire) %> |
-<%= link_to 'Back', questionnaires_path %>
+<%= link_to 'Edit', edit_questionnaire_path(@questionnaire), class: "btn btn-primary mb-3" %>
+<br>
+<%= link_to 'return to questionnaires list', questionnaires_path, class: "btn btn-secondary" %>

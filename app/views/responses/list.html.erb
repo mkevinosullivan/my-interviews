@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Responses for <%= format("%s %s", @candidate.first_name, @candidate.last_name) %></h1>
+<h3>Responses for <%= format("%s %s", @candidate.first_name, @candidate.last_name) %></h3>
 
 <table>
   <thead>
@@ -31,4 +29,4 @@
 
 <br>
 
-<%= link_to 'Back to job posting', job_posting_path(id: @job_posting.id) %>
+<%= link_to 'return to job posting', job_posting_path(id: @job_posting.id), class: "btn btn-secondary" %>

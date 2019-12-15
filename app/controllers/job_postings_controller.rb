@@ -25,7 +25,11 @@ class JobPostingsController < ApplicationController
     puts "###"
 
     if @questionnaires.size == 0
-      redirect_to questionnaires_url, notice: "Please create a questionnaire before creating a job posting."
+      flash.notice = {
+        alert_class: :warning,
+        message: "Please create a questionnaire before creating a job posting."
+      }
+      redirect_to questionnaires_url
     end
   end
 
@@ -51,7 +55,11 @@ class JobPostingsController < ApplicationController
     @job_posting = JobPosting.new(job_posting_params)
 
     if @job_posting.save
-      redirect_to select_candidates_url(@job_posting), notice: 'Job posting was successfully created - select candidates for interview.'
+      flash.notice = {
+        alert_class: :success,
+        message: "Job posting was successfully created - select candidates for interview."
+      }
+      redirect_to select_candidates_url(@job_posting)
     else
       set_questionnaire_params
       render :new
@@ -67,7 +75,11 @@ class JobPostingsController < ApplicationController
     puts "###"
 
     if @job_posting.update(job_posting_params)
-      redirect_to select_candidates_url(@job_posting), notice: 'Job posting was successfully updated - update candidates for interview (if needed).'
+      flash.notice = {
+        alert_class: :success,
+        message: "Job posting was successfully updated - add/update candidates for interview (if needed)."
+      }
+      redirect_to select_candidates_url(@job_posting)
     else
       render :edit
     end
@@ -89,7 +101,11 @@ class JobPostingsController < ApplicationController
     @job_posting.candidate_ids = candidate_ids
 
     get_current_candidates
-    render :show, notice: 'Candidates for job posting were successfully updated.'
+    flash.notice = {
+      alert_class: :success,
+      message: "Candidates for job posting were successfully updated."
+    }
+    redirect_to job_posting_url(@job_posting)
   end
 
   # DELETE /job_postings/1
@@ -97,7 +113,11 @@ class JobPostingsController < ApplicationController
   def destroy
     @job_posting.destroy
     respond_to do |format|
-      format.html { redirect_to job_postings_url, notice: 'Job posting was successfully destroyed.' }
+      flash.notice = {
+        alert_class: :success,
+        message: 'Job posting was successfully destroyed.'
+      }
+      format.html { redirect_to job_postings_url }
       format.json { head :no_content }
     end
   end

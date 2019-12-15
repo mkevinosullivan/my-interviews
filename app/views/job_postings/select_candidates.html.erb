@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <% submit_button_desc = 'Add candidates to job posting' %>
 
 <%= form_with(model: @job_posting, url: set_candidates_path, method: :post, local: true) do %>
@@ -76,10 +74,9 @@
     </tbody>
   </table>
 
-  <div class="actions">
-    <%= submit_tag(submit_button_desc) %>
+  <div class="mb-3 mt-3">
+    <%= submit_tag(submit_button_desc, class: "btn btn-primary") %>
   </div>
 <% end %>
 
-<%= link_to 'Edit', edit_job_posting_path(@job_posting) %> |
-<%= link_to 'Back', job_postings_path %>
+<%= link_to 'return to job postings list', job_postings_path, class: "btn btn-secondary" %>

@@ -1,7 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<h1>New Questionnaire</h1>
+<h3>New questionnaire</h3>
 
 <%= render 'form', questionnaire: @questionnaire %>
 
-<%= link_to 'Back', questionnaires_path %>
+<%= link_to 'return to questionnaires list', questionnaires_path, class: "btn btn-secondary" %>

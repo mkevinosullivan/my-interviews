@@ -1,8 +1,8 @@
-<h1>New Job Posting</h1>
+<h3>Create a new job posting</h3>
 
 <%= render 'form',
   job_posting: @job_posting,
   questionnaires: @questionnaires,
   current_questionnaire_id: @current_questionnaire_id %>
 
-<%= link_to 'Back', job_postings_path %>
+<%= link_to 'return to job postings list', job_postings_path, class: "btn btn-secondary" %>

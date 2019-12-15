@@ -168,6 +168,29 @@
   ```
 - `$ bin/rails db:migrate`
 
+### Adding Bootstrap
+- `$ bin/yarn add bootstrap jquery popper.js`
+- Configure Rails to alias `$` to the `jquery` namespace in `config/webpack/environment.js`
+  ```
+  const { environment } = require('@rails/webpacker')
+
+  const webpack = require('webpack')
+  environment.plugins.append('Provide', new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    Popper: ['popper.js', 'default']
+  }))
+
+  module.exports = environment
+  ```
+- Require `bootstrap` in `app/javascript/packs/application.js` by adding the following line after the last `require` in the file:
+  ```
+  require("bootstrap/dist/js/bootstrap")
+  ```
+- Rename `application.css` to `application.scss` in `app/assets/stylesheets` and add the following line to the file:
+  ```
+  @import "bootstrap/scss/bootstrap";
+  ```
 
 ### Some references
 [Rails building json API responses with JBuilder](https://rubyinrails.com/2018/11/10/rails-building-json-api-resopnses-with-jbuilder/)

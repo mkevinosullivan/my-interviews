@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Questionnaires</h1>
+<h3>Questionnaires</h3>
 
 <table>
   <thead>
@@ -14,9 +12,9 @@
     <% @questionnaires.each do |questionnaire| %>
       <tr>
         <td><%= questionnaire.description %> (<%= questionnaire.questions.size %>)</td>
-        <td><%= link_to 'Show', questionnaire %></td>
-        <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire) %></td>
-        <td><%= link_to 'Destroy', questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', questionnaire, class: "btn btn-primary btn-sm" %></td>
+        <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire), class: "btn btn-primary btn-sm" %></td>
+        <td><%= link_to 'Delete', questionnaire, class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Questionnaire', new_questionnaire_path %>
+<%= link_to '+ create a new questionnaire', new_questionnaire_path, class: "btn btn-primary" %>

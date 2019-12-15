@@ -1,51 +1,36 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Description:</strong>
   <br>
   <%= @job_posting.description %>
   <br>
-  <%= link_to 'Job posting link', @job_posting.posting_link %>
+  <%= link_to 'link to external job posting', @job_posting.posting_link %>
 </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Candidates</th>
-      <th></th>
-    </tr>
-  </thead>
+<h5>Candidates</h5>
 
-  <tbody>
-    <% if @current_candidates.size > 0 %>
-      <% @current_candidates.each do |candidate| %>
-        <tr>
-          <td><%= format('%s %s (%s)',
-                    candidate.first_name,
-                    candidate.last_name,
-                    candidate.email) %></td>
-          <td>
-            <% if Response.find_by(
-                  candidate_id: candidate.id,
-                  job_posting_id: @job_posting.id).blank? %>
-              <%= link_to 'Start interview', interview_path(
-                  candidate_id: candidate.id,
-                  job_posting_id: @job_posting.id) %>
-            <% else %>
-              Interview complete (<%= link_to 'review', list_responses_path(candidate_id: candidate.id, job_posting_id: @job_posting.id) %>)
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    <% else %>
-      <tr>
-        <td>No candidates added to this job posting.</td>
-        <td></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @current_candidates.size > 0 %>
+  <% @current_candidates.each do |candidate| %>
+    <div class="mb-3">
+      <%= format('%s %s (%s)', candidate.first_name, candidate.last_name, candidate.email) %>
+      <% if Response.find_by(
+            candidate_id: candidate.id,
+            job_posting_id: @job_posting.id).blank? %>
+        <%= link_to 'Start interview', interview_path(
+            candidate_id: candidate.id,
+            job_posting_id: @job_posting.id),
+            class: "btn btn-primary btn-sm" %>
+      <% else %> <%# if !Response.find_by() %>
+        - <span class="text-success">Interview completed</span> <%= link_to 'review', list_responses_path(candidate_id: candidate.id, job_posting_id: @job_posting.id), class: "btn btn-primary btn-sm" %>
+      <% end %> <%# if..else Response.find_by() %>
+    </div>
+  <% end %> <%# @current_candidates.each do %>
+<% else %>
+  <div class="mb-3">
+    No candidates added to this job posting.
+  </div>
+<% end %>
 
-
-<%= link_to 'Edit', edit_job_posting_path(@job_posting) %> |
-<%= link_to 'Back', job_postings_path %>
+<br>
+<%= link_to 'Edit', edit_job_posting_path(@job_posting), class: "btn btn-primary mb-3" %>
+<br>
+<%= link_to 'return to job postings list', job_postings_path, class: "btn btn-secondary" %>

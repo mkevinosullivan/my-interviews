@@ -25,7 +25,11 @@ class QuestionnairesController < ApplicationController
     puts "###"
 
     if @questions.size == 0
-      redirect_to questions_url, notice: "Please create at least one question before creating a questionnaire."
+      flash.notice = {
+        alert_class: :warning,
+        message: "Please create at least one question before creating a questionnaire."
+      }
+      redirect_to questions_url
     end
 
   end
@@ -42,7 +46,11 @@ class QuestionnairesController < ApplicationController
 
     if @questionnaire.save
       set_edit_params
-      render :edit, notice: 'Questionnaire was successfully created.'
+      flash.notice = {
+        alert_class: :success,
+        message: "Questionnaire was successfully created - add one or more questions."
+      }
+      render :edit
     else
       render :new
     end
@@ -68,7 +76,11 @@ class QuestionnairesController < ApplicationController
     @questionnaire.question_ids = question_ids
 
     if questionnaire_saved
-      redirect_to @questionnaire, notice: 'Questionnaire was successfully updated.'
+      flash.notice = {
+        alert_class: :success,
+        message: "Questionnaire was successfully updated."
+      }
+      redirect_to @questionnaire
     else
       render :edit
     end
@@ -79,7 +91,11 @@ class QuestionnairesController < ApplicationController
   def destroy
     @questionnaire.destroy
     respond_to do |format|
-      format.html { redirect_to questionnaires_url, notice: 'Questionnaire was successfully destroyed.' }
+      flash.notice = {
+        alert_class: :success,
+        message: "Questionnaire was successfully deleted."
+      }
+      format.html { redirect_to questionnaires_url }
       format.json { head :no_content }
     end
   end
