@@ -1,3 +1,39 @@
 // Place all the styles related to the JobPostings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.job-posting {
+  // font-size: 120%;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.job-posting-row {
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  border-bottom: 1px solid lightgray;
+}
+
+.job-posting-row:hover {
+  background-color: lightcyan;
+}
+
+.job-posting-questionnaire-row {
+  padding-bottom: 0.5em;
+  vertical-align: middle;
+  padding-top: 0.5em;
+  border-bottom: 1px solid lightgray;
+}
+
+.job-posting-questionnaire-row:hover {
+  background-color: lightcyan;
+}
+
+.job-posting-candidate-row {
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  border-bottom: 1px solid lightgray;
+}
+
+.job-posting-candidate-row:hover {
+  background-color: lightcyan;
+}

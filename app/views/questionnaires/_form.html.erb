@@ -11,12 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group mb-3">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= button_tag type: 'submit', class: "btn btn-sm btn-primary" do %>
+      <i class="fas fa-save"></i> save and continue, to add/delete questions
+    <% end %>
   </div>
+
 <% end %>

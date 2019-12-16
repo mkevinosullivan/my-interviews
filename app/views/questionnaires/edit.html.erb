@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Editing Questionnaire</h1>
+<h3>Edit questionnaire</h3>
 
 <%# copied from app/views/questionnaires/_form.html.erb %>
 <%= form_with(model: @questionnaire, local: true) do |form| %>
@@ -16,62 +14,51 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group mb-3">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class: "form-control", rows: "3" %>
   </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">
-          Questions already included
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% if @questions_included.size > 0 %>
-        <% @questions_included.each do |question| %>
-        <tr>
-        <td><%= check_box_tag('questions[]', question.id, true) %></td>
-          <td><%= question.question %></td>
-        </tr>
-        <% end %>
-      <% else %>
-        <tr>
-          <td>(none)</td>
-          <td></td>
-        </tr>
+  <div class="mb-2">
+    <% if @questions_included.size > 0 %>
+      <strong>Questions already included</strong>
+      <% @questions_included.each do |question| %>
+      <div class="questionnaire-question-row">
+        <span class="d-inline-block text-truncate" style="max-width: 500px;">
+          <%= check_box_tag('questions[]', question.id, true) %>
+          <%= question.question %>
+        </span>
+      </div>
       <% end %>
-    </tbody>
-  </table>
+    <% else %>
+      <strong>No questions selected.</strong>
+    <% end %>
+  </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">
-          Other questions available
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
+  <div class="mb-1">
+    <% if @other_questions.size > 0 %>
+      <strong>Other questions available</strong>
       <% @other_questions.each do |question| %>
-      <tr>
-        <td><%= check_box_tag('questions[]', question.id) %></td>
-        <td><%= question.question %></td>
-      </tr>
+      <div class="questionnaire-question-row">
+        <span class="d-inline-block text-truncate" style="max-width: 500px;">
+          <%= check_box_tag('questions[]', question.id) %>
+          <%= question.question %>
+        </span>
+      </div>
       <% end %>
-    </tbody>
-  </table>
-
-  <div class="actions">
-    <%= form.submit %>
+    <% else %>
+      <strong>No other questions available for selection.</strong>
+    <% end %>
   </div>
+
+  <div class="mb-3 mt-3">
+    <%= button_tag type: 'submit', class: "btn btn-sm btn-primary" do %>
+      <i class="fas fa-save"></i> save questionnaire
+    <% end %>
+  </div>
+
 
 <% end %>
 
 
-<%= link_to 'Show', @questionnaire %> |
-<%= link_to 'Back', questionnaires_path %>
+<%= link_to 'return to questionnaires list', questionnaires_path, class: "btn btn-sm btn-secondary" %>

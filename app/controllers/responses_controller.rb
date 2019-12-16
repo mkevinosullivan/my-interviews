@@ -41,12 +41,20 @@ class ResponsesController < ApplicationController
       puts "## DEBUG - response_data ## [" + response_data.to_s + "]"
       response = Response.new(response_data)
       puts "## DEBUG - response, after Response.new ## [" + response.to_s + "]"
-      all_saved = all_saved && response.save!
+      all_saved = all_saved && response.save
     end
 
     if all_saved
-      redirect_to job_posting_path(id: params[:job_posting_id]), notice: 'Response(s) were successfully saved.'
+      flash.notice = {
+        alert_class: :success,
+        message: "Response(s) were successfully saved."
+      }
+      redirect_to job_posting_path(id: params[:job_posting_id])
     else
+      flash.notice = {
+        alert_class: :danger,
+        message: "Responses and/or scores cannot be blank."
+      }
       redirect_to interview_path(candidate_id: params[:candidate_id], job_posting_id: params[:job_posting_id])
     end
   end
@@ -56,7 +64,11 @@ class ResponsesController < ApplicationController
   def update
     respond_to do |format|
       if @response.update(response_params)
-        format.html { redirect_to @response, notice: 'Response was successfully updated.' }
+        flash.notice = {
+          alert_class: :success,
+          message: "Response was successfully updated."
+        }
+        format.html { redirect_to @response }
         format.json { render :show, status: :ok, location: @response }
       else
         format.html { render :edit }
@@ -70,7 +82,11 @@ class ResponsesController < ApplicationController
   def destroy
     @response.destroy
     respond_to do |format|
-      format.html { redirect_to responses_url, notice: 'Response was successfully destroyed.' }
+      flash.notice = {
+        alert_class: :success,
+        message: "Response was successfully destroyed."
+      }
+      format.html { redirect_to responses_url }
       format.json { head :no_content }
     end
   end

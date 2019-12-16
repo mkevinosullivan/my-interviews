@@ -1,27 +1,33 @@
-<p id="notice"><%= notice %></p>
+<h3>Interview questions</h3>
 
-<h1>Questions</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Question</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @questions.each do |question| %>
-      <tr>
-        <td><%= question.question %></td>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <% @questions.each do |question| %>
+    <div class="row question-row">
+      <div>
+        <%= link_to edit_question_path(question) do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to question, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <span class="text-danger">
+            <i class="fas fa-trash-alt"></i>
+          </span>
+        <% end %>
+      </div>
+      <div class="question">
+        <span class="d-inline-block text-truncate" style="max-width: 500px;">
+          <%= question.question %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <br>
 
-<%= link_to 'New question', new_question_path %>
+<%= link_to new_question_path do %>
+  <span class="btn btn-sm btn-primary">
+    <i class="fas fa-plus-square"></i> add a new question
+  </span>
+<% end %>

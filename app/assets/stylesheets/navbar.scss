@@ -1,0 +1,18 @@
+nav {
+  .navbar-nav ul li {
+    display: inline-flex;
+  }
+  .navbar-brand {
+    padding: 3px;
+    // transition: opacity 0.15s;
+  }
+  a:hover, .navbar-brand:hover {
+    // opacity: 0.25;
+    color: white !important;
+    background-color: black;
+  }
+}
+
+body {
+  margin-top: 50px;
+}

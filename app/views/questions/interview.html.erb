@@ -1,50 +1,30 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Questions for <%= @candidate.first_name %> <%= @candidate.last_name %></h1>
-<h2>(for job posting)</h2>
+<h3>Questions for <%= @candidate.first_name %> <%= @candidate.last_name %></h3>
+<h5>(for job posting)</h5>
 <p>
   <strong>Description:</strong>
   <br>
   <%= @job_posting.description %>
   <br>
-  <%= link_to 'Job posting link', @job_posting.posting_link %>
+  <%= link_to 'link to external job posting', @job_posting.posting_link %>
 </p>
 
 <%= form_with(url: responses_path, method: :post) do %>
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-      <% @questions.each_with_index do |question, index| %>
-      <tr>
-        <td><%= index+1 %>.</td>
-        <td><%= question.question %></td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <%= text_area_tag('response-'+index.to_s, "Insert candidate's answer here ...", size: "120x12") %>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <%= select_tag('score-'+index.to_s, options_for_select([['--', 0], ['Poor response', 1], ['Below average', 2], ['Average', 3], ['Good response', 4], ['Excellent', 5]])) %>
-        </td>
-      </tr>
+  <% @questions.each_with_index do |question, index| %>
+    <div class="mb-2">
+      <%= index+1 %>. <%= question.question %>
+    </div>
+    <div class="form-group">
+      <%= text_area_tag('response-'+index.to_s, "", class: "form-control mb-3", rows: "6") %>
+      <%= select_tag('score-'+index.to_s, options_for_select([['Poor response', 1], ['Below average', 2], ['Average', 3], ['Good response', 4], ['Excellent', 5]]), { prompt: 'Select score' }) %>
       <%= hidden_field_tag('question_id-'+index.to_s, question.id) %>
-      <% end %>  <%# end of @questions.each_with_index do %>
-      <tr>
-        <td colspan="2">
-          <%= hidden_field_tag(:candidate_id, @candidate.id) %>
-          <%= hidden_field_tag(:job_posting_id, @job_posting.id) %>
-          <%= hidden_field_tag(:question_count, @questions.size) %>
-          <%= submit_tag('Submit responses and scores') %>
-        </td>
-      </tr>
-  </tbody>
-</table>
+    </div>
+  <% end %>  <%# end of @questions.each_with_index do %>
+
+  <%= hidden_field_tag(:candidate_id, @candidate.id) %>
+  <%= hidden_field_tag(:job_posting_id, @job_posting.id) %>
+  <%= hidden_field_tag(:question_count, @questions.size) %>
+
+  <div class="mb-3">
+    <%= submit_tag('Submit responses and scores', class: "btn btn-sm btn-primary" ) %>
+  </div>
 <% end %> <%# end of form_with() %>

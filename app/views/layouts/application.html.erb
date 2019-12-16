@@ -7,21 +7,21 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/6caed0721b.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <table style="width: 100%">
-      <tr>
-        <td style="width: 100px; border-right: 1px solid gray; vertical-align: top">
-          <%= link_to 'Job Postings', job_postings_path %>
-          <%= link_to 'Questionnaires', questionnaires_path %>
-          <%= link_to 'Questions', questions_path %>
-          <%= link_to 'Candidates', candidates_path %>
-        </td>
-        <td style="vertical-align: top">
+    <%= render 'shared/navbar' %>
+    <div class="container mt-2">
+      <div class="row">
+        <div class="col-md-3">
+          <%= render "shared/side_menu" %>
+        </div><!-- .col-md-3 -->
+        <div class="col">
+          <%= render "shared/message" %>
           <%= yield %>
-        </td>
-      </tr>
-    </table>
+        </div> <!-- .col -->
+      </div> <!-- .row -->
+    </div> <!-- .container mt-2 -->
   </body>
 </html>

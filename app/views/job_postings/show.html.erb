@@ -1,51 +1,56 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Description:</strong>
-  <br>
+<strong>Job posting description</strong>
+<div class="job-posting">
   <%= @job_posting.description %>
-  <br>
-  <%= link_to 'Job posting link', @job_posting.posting_link %>
-</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Candidates</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if @current_candidates.size > 0 %>
-      <% @current_candidates.each do |candidate| %>
-        <tr>
-          <td><%= format('%s %s (%s)',
-                    candidate.first_name,
-                    candidate.last_name,
-                    candidate.email) %></td>
-          <td>
-            <% if Response.find_by(
-                  candidate_id: candidate.id,
-                  job_posting_id: @job_posting.id).blank? %>
-              <%= link_to 'Start interview', interview_path(
-                  candidate_id: candidate.id,
-                  job_posting_id: @job_posting.id) %>
-            <% else %>
-              Interview complete (<%= link_to 'review', list_responses_path(candidate_id: candidate.id, job_posting_id: @job_posting.id) %>)
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    <% else %>
-      <tr>
-        <td>No candidates added to this job posting.</td>
-        <td></td>
-      </tr>
+</div>
+<div class="ml-1 mb-3">
+  <span style="font-size: 80%;">
+    <%= link_to @job_posting.posting_link do %>
+      <i class="fas fa-external-link-alt"></i> external link
     <% end %>
-  </tbody>
-</table>
+  </span>
+</div>
 
+<strong>Candidates</strong>
 
-<%= link_to 'Edit', edit_job_posting_path(@job_posting) %> |
-<%= link_to 'Back', job_postings_path %>
+<% if @current_candidates.size > 0 %>
+  <% @current_candidates.each do |candidate| %>
+    <div class="mb-3">
+      <% if Response.find_by(
+            candidate_id: candidate.id,
+            job_posting_id: @job_posting.id).blank? %>
+        <span style="font-size: 100%;">
+          <i class="far fa-square"></i>
+        </span>
+        <%= format('%s %s (%s)', candidate.first_name, candidate.last_name, candidate.email) %>
+        <%= link_to interview_path(candidate_id: candidate.id, job_posting_id: @job_posting.id) do %>
+          <span class="btn btn-sm btn-primary">
+            <i class="fas fa-arrow-circle-right"></i> start interview
+          </span>
+        <% end %>
+      <% else %> <%# if !Response.find_by() %>
+        <span style="font-size: 100%; color: green;">
+          <i class="far fa-check-square"></i>
+          <%= format('%s %s (%s)', candidate.first_name, candidate.last_name, candidate.email) %>
+        </span>
+        <%= link_to list_responses_path(candidate_id: candidate.id, job_posting_id: @job_posting.id) do %>
+          <span class="btn btn-sm btn-success">
+            <i class="fas fa-eye"></i> review
+          </span>
+        <% end %>
+      <% end %> <%# if..else Response.find_by() %>
+    </div>
+  <% end %> <%# @current_candidates.each do %>
+<% else %>
+  <div class="mb-3">
+    No candidates added to this job posting.
+  </div>
+<% end %>
+
+<br>
+<%= link_to edit_job_posting_path(@job_posting) do %>
+  <span class="btn btn-sm btn-primary mb-3">
+    <i class="fas fa-edit"></i> edit job posting
+  </span>
+<% end %>
+<br>
+<%= link_to 'return to job postings list', job_postings_path, class: "btn btn-sm btn-secondary" %>
