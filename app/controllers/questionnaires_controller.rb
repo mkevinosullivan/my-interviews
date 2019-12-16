@@ -50,7 +50,7 @@ class QuestionnairesController < ApplicationController
         alert_class: :success,
         message: "Questionnaire was successfully created - add one or more questions."
       }
-      render :edit
+      redirect_to edit_questionnaire_path(@questionnaire)
     else
       render :new
     end

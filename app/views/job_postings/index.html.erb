@@ -1,35 +1,59 @@
 <h3>Job Postings</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th># Candidates</th>
-      <th># Interviews completed</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container">
+  <div class="row mb-1">
+    <div class="align-text-bottom">
+      Description <span class="text-secondary" style="font-size: 80%;">(interviews completed / candidates)</span>
+    </div>
+  </div>
 
-  <tbody>
-    <% @job_postings.each do |job_posting| %>
-      <tr>
-        <td><%= job_posting.description %><br><%= link_to 'link to external job posting', job_posting.posting_link %></td>
-        <td><%= job_posting.candidates.size %></td>
-        <td>
-          <% if responses_for_job_posting = Response.where(job_posting_id: job_posting.id) %>
-            <%= responses_for_job_posting.select(:candidate_id).distinct.size %>
-          <% else %>
-            0
+  <% @job_postings.each do |job_posting| %>
+    <div class="row job-posting-row">
+      <div>
+        <%= link_to edit_job_posting_path(job_posting) do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to job_posting, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <span class="text-danger">
+            <i class="fas fa-trash-alt"></i>
+          </span>
+        <% end %>
+      </div>
+      <%= link_to job_posting, class: "text-reset" do %>
+        <div class="job-posting">
+          <span class="d-inline-block text-truncate" style="max-width: 500px;">
+            <%= job_posting.description %>
+          </span>
+        </div>
+      <% end %>
+      <div class="ml-1">
+        <span style="font-size: 80%;">
+          <%= link_to job_posting.posting_link do %>
+            <i class="fas fa-external-link-alt"></i> external link
           <% end %>
-        </td>
-        <td><%= link_to 'Show', job_posting, class: "btn btn-primary btn-sm" %></td>
-        <td><%= link_to 'Edit', edit_job_posting_path(job_posting), class: "btn btn-primary btn-sm" %></td>
-        <td><%= link_to 'Delete', job_posting, class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </span>
+      </div>
+      <div class="ml-1">
+        <span class="text-secondary" style="font-size: 80%;">
+        (
+        <% if responses_for_job_posting = Response.where(job_posting_id: job_posting.id) %>
+          <%= responses_for_job_posting.select(:candidate_id).distinct.size %>
+        <% else %>
+          0
+        <% end %>
+        / <%= job_posting.candidates.size %>
+        )
+        </span>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <br>
-
-<%= link_to '+ create a new job posting', new_job_posting_path, class: "btn btn-primary" %>
+<%= link_to new_job_posting_path do %>
+  <span class="btn btn-sm btn-primary">
+    <i class="fas fa-plus-square"></i> add a new job posting
+  </span>
+<% end %>

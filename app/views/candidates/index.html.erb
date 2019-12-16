@@ -1,17 +1,33 @@
 <h3>Candidates</h3>
 
-<table>
-  <tbody>
-    <% @candidates.each do |candidate| %>
-      <tr>
-        <td><%= format('%s %s (%s)', candidate.first_name, candidate.last_name, candidate.email) %></td>
-        <td><%= link_to 'Edit', edit_candidate_path(candidate), class: "btn btn-primary btn-sm" %></td>
-        <td><%= link_to 'Delete', candidate, class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container-fluid">
+  <% @candidates.each do |candidate| %>
+    <div class="row candidate-row">
+      <div>
+        <%= link_to edit_candidate_path(candidate) do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to candidate, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <span class="text-danger">
+            <i class="fas fa-trash-alt"></i>
+          </span>
+        <% end %>
+      </div>
+      <div class="candidate">
+        <%= format('%s %s (%s)', candidate.first_name, candidate.last_name, candidate.email) %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <br>
 
-<%= link_to '+ create a new candidate', new_candidate_path, class: "btn btn-primary" %>
+<%= link_to new_candidate_path do %>
+  <span class="btn btn-sm btn-primary">
+    <i class="fas fa-plus-square"></i> add a new candidate
+  </span>
+<% end %>
+
+

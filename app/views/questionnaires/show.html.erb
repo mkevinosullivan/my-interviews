@@ -1,34 +1,28 @@
-<p>
-  <strong>Description:</strong>
+<div class="mb-3">
+  <strong>Questionnaire description</strong><br>
   <%= @questionnaire.description %>
+</div>
 
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">
-          Questions
-        </th>
-      </tr>
-    </thead>
+<div class="mb-3">
+  <% if @questions.size > 0 %>
+    <strong>Questions included</strong>
+    <% @questions.each_with_index do |question, index| %>
+    <div class="questionnaire-question-row">
+      <div>
+        <%= question.question %>
+      </div>
+    </div>
+    <% end %>
+  <% else %>
+    <strong>There are no questions linked to this questionnaire.<br>Please add some questions.</strong>
+  <% end %>
+</div>
 
-    <tbody>
-      <% if @questions.size > 0 %>
-        <% @questions.each_with_index do |question, index| %>
-        <tr>
-          <td><%= index+1 %>.</td>
-          <td><%= question.question %></td>
-        </tr>
-        <% end %>
-      <% else %>
-        <tr>
-          <td>There are no questions linked to this questionnaire.<br>Please add some questions.</td>
-          <td></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</p>
+<%= link_to edit_questionnaire_path(@questionnaire) do %>
+  <span class="btn btn-sm btn-primary mb-3">
+    <i class="fas fa-edit"></i> edit questionnaire
+  </span>
+<% end %>
 
-<%= link_to 'Edit', edit_questionnaire_path(@questionnaire), class: "btn btn-primary mb-3" %>
 <br>
-<%= link_to 'return to questionnaires list', questionnaires_path, class: "btn btn-secondary" %>
+<%= link_to 'return to questionnaires list', questionnaires_path, class: "btn btn-sm btn-secondary" %>

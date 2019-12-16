@@ -13,6 +13,11 @@
   <%= @candidate.email %>
 </p>
 
-<%= link_to 'Edit', edit_candidate_path(@candidate), class: "btn btn-primary mb-3" %>
+<%= link_to edit_candidate_path(@candidate) do %>
+  <span class="btn btn-sm btn-primary mb-3">
+    <i class="fas fa-edit"></i> edit candidate details
+  </span>
+<% end %>
+
 <br>
-<%= link_to 'return to candidate list', candidates_path, class: "btn btn-secondary" %>
+<%= link_to 'return to candidate list', candidates_path, class: "btn btn-sm btn-secondary" %>

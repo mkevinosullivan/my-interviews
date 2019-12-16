@@ -16,7 +16,9 @@
   </div>
 
   <div class="mb-3">
-    <%= form.submit class: "btn btn-primary" %>
+    <%= button_tag type: 'submit', class: "btn btn-sm btn-primary" do %>
+      <i class="fas fa-save"></i> save question
+    <% end %>
   </div>
 
 <% end %>

@@ -1,25 +1,41 @@
 <h3>Questionnaires</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description (# questions)</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container">
+  <div class="row mb-1">
+    <div class="align-text-bottom">
+      Description <span class="text-secondary" style="font-size: 80%;">(# questions)</span>
+    </div>
+  </div>
 
-  <tbody>
-    <% @questionnaires.each do |questionnaire| %>
-      <tr>
-        <td><%= questionnaire.description %> (<%= questionnaire.questions.size %>)</td>
-        <td><%= link_to 'Show', questionnaire, class: "btn btn-primary btn-sm" %></td>
-        <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire), class: "btn btn-primary btn-sm" %></td>
-        <td><%= link_to 'Delete', questionnaire, class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% @questionnaires.each do |questionnaire| %>
+    <div class="row questionnaire-row">
+      <div>
+        <%= link_to edit_questionnaire_path(questionnaire) do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to questionnaire, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <span class="text-danger">
+            <i class="fas fa-trash-alt"></i>
+          </span>
+        <% end %>
+      </div>
+      <%= link_to questionnaire, class: "text-reset" do %>
+        <div class="questionnaire">
+          <span class="d-inline-block text-truncate" style="max-width: 500px;">
+            <%= questionnaire.description %>
+          <span class="text-secondary" style="font-size: 80%;">(<%= questionnaire.questions.size %>)</span>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <br>
-
-<%= link_to '+ create a new questionnaire', new_questionnaire_path, class: "btn btn-primary" %>
+<%= link_to new_questionnaire_path do %>
+  <span class="btn btn-sm btn-primary">
+    <i class="fas fa-plus-square"></i> add a new questionnaire
+  </span>
+<% end %>

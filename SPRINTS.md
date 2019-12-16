@@ -73,6 +73,11 @@
     - Recruiters - can add job postings/candidates/questionnaires/questions (but bound by )
 
 
+- [ ] ***Add pagination and search*** (branch: `add-pagination-search`)
+  - For adding questions to questionnaires, need pagination and search
+  - For adding candidates to job-postings, need pagination (maybe search)
+
+
 - [ ] ***TBD*** (branch: `tbd-branch-name`)
   - 1
   - 2

@@ -3,6 +3,10 @@
   <%= @question.question %>
 </p>
 
-<%= link_to 'Edit', edit_question_path(@question), class: "btn btn-primary mb-3" %>
+<%= link_to edit_question_path(@question) do %>
+  <span class="btn btn-sm btn-primary mb-3">
+    <i class="fas fa-edit"></i> edit question
+  </span>
+<% end %>
 <br>
-<%= link_to 'return to question list', questions_path, class: "btn btn-secondary"  %>
+<%= link_to 'return to question list', questions_path, class: "btn btn-sm btn-secondary"  %>

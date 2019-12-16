@@ -1,3 +1,16 @@
 // Place all the styles related to the Candidates controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.candidate {
+  margin-left: 5px;
+}
+
+.candidate-row {
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  border-bottom: 1px solid lightgray;
+}
+
+.candidate-row:hover {
+  background-color: lightcyan;
+}

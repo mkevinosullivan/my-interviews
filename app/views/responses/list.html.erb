@@ -1,32 +1,25 @@
 <h3>Responses for <%= format("%s %s", @candidate.first_name, @candidate.last_name) %></h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Question</th>
-      <th>Response</th>
-      <th>Score</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% total_score = 0 %>
-    <% @responses.each do |response| %>
-      <% question = Question.find(response.question_id) %>
-      <tr>
-        <td><%= question.question %></td>
-        <td><%= response.response %></td>
-        <td><%= response.score %></td>
-      </tr>
-      <% total_score += response.score %>
-    <% end %>
-    <tr>
-      <td colspan="2">Total score</td>
-      <td><%= total_score %></td>
-    </tr>
-  </tbody>
-</table>
+<% total_score = 0 %>
+<% @responses.each do |response| %>
+  <% question = Question.find(response.question_id) %>
+  <% total_score += response.score %>
+    <div class="response-row">
+      <div class="response-row-question">
+        <strong>Q. </strong>
+        <em><%= question.question %></em>
+      </div>
+      <div class="response-row-response">
+        <strong>A. </strong>
+        <%= response.response %><br>
+        (<%= response.score %>)
+      </div>
+    </div>
+<% end %>
+<div class="total-score">
+  Total score = <%= total_score %>
+</div>
 
 <br>
 
-<%= link_to 'return to job posting', job_posting_path(id: @job_posting.id), class: "btn btn-secondary" %>
+<%= link_to 'return to job posting', job_posting_path(id: @job_posting.id), class: "btn btn-sm btn-secondary" %>
