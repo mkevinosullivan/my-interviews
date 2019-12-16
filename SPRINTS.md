@@ -31,9 +31,13 @@
   - Test a clean download of the repo and setup instructions
 
 
-- [ ] ***Add Bootstrap and "pretty-up" application*** (branch: `add-bootstrap`)
+- [x] ***Add Bootstrap and "pretty-up" application*** (branch: `add-bootstrap`)
   - Add a navbar with logo
   - Add styles to form elements, buttons, menus, etc.
+
+
+- [x] ***Add seed data for demo*** (branch: `add-bootstrap`)
+  - Add content to `db/seeds.rb` to populate database using `bin/rails db:reset` for demo
 
 ### Planned (not necessarily in this order)
 - [ ] ***Upload file of candidates with job posting*** (branch: `upload-candidates-to-job-posting`)
@@ -76,6 +80,12 @@
 - [ ] ***Add pagination and search*** (branch: `add-pagination-search`)
   - For adding questions to questionnaires, need pagination and search
   - For adding candidates to job-postings, need pagination (maybe search)
+
+
+- [ ] ***Add reporting and sorting of responses*** (branch: `report-sort-responses`)
+  - Add ability to sort the results of the candidate interviews by total score
+  - Add ability to download results for offline processing (e.g., in a spreadsheet)
+  - Add ability to download a summary report of a job posting and interview results
 
 
 - [ ] ***TBD*** (branch: `tbd-branch-name`)
