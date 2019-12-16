@@ -16,13 +16,7 @@ class QuestionnairesController < ApplicationController
   # GET /questionnaires/new
   def new
     @questionnaire = Questionnaire.new
-
     @questions = Question.all
-
-    puts "###"
-    puts "### DEBUG" + params.to_s
-    puts "### questionnaires.size = " + (@questions ? @questions.size.to_s : "[no questions]")
-    puts "###"
 
     if @questions.size == 0
       flash.notice = {
@@ -59,12 +53,6 @@ class QuestionnairesController < ApplicationController
   # PATCH/PUT /questionnaires/1
   # PATCH/PUT /questionnaires/1.json
   def update
-    puts "###"
-    puts "### DEBUG" + params.to_s
-    puts "### questionnaire_params = " + questionnaire_params.to_s
-    puts "### questions_params = " + questions_params.to_s
-    puts "###"
-    
     question_ids = []
     if questions_params
       questions_params.each do |question_id|

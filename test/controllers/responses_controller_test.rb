@@ -17,7 +17,6 @@ class ResponsesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create response" do
     assert_difference('Response.count') do
-      # puts "## DEBUG ## " + @response.to_s
       post responses_url, params: { response: { response: @response.response, score: @response.score } }
     end
 
