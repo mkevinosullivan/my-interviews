@@ -34,13 +34,9 @@ class ResponsesController < ApplicationController
     responses = extract_responses
     # @response = Response.new(response_params)
 
-    puts "## DEBUG - number of responses ## [" + responses.size.to_s + "]"
-
     all_saved = true
     responses.each do |response_data|
-      puts "## DEBUG - response_data ## [" + response_data.to_s + "]"
       response = Response.new(response_data)
-      puts "## DEBUG - response, after Response.new ## [" + response.to_s + "]"
       all_saved = all_saved && response.save
     end
 
@@ -103,12 +99,9 @@ class ResponsesController < ApplicationController
     end
 
     def extract_responses
-      # puts "## DEBUG ## [" + params.to_s + "]"
       responses = []
 
-      puts "## DEBUG ## [" + (params[:question_count].to_i).to_s + "]"
       (params[:question_count].to_i).times do |index|
-        puts "## DEBUG - extract_responses, iteration index [#{index}] ##"
         responses << {
           response: params['response-'+index.to_s],
           score: params['score-'+index.to_s],
@@ -118,7 +111,6 @@ class ResponsesController < ApplicationController
         }
       end
 
-      puts "## DEBUG ## [" + responses.to_s + "]"
       responses
     end
 end

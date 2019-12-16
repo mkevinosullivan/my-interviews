@@ -4,13 +4,11 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    # puts "## DEBUG ## [" + params.to_s + "]"
     @questions = Question.all
   end
 
   # GET /interview
   def interview
-    # puts "## DEBUG ## [" + param.to_s + "]"
     @job_posting = JobPosting.find(params[:job_posting_id])
     questionnaire = Questionnaire.find(@job_posting.questionnaire_id)
     @questions = questionnaire.questions

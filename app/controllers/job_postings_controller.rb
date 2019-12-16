@@ -19,11 +19,6 @@ class JobPostingsController < ApplicationController
     @questionnaires = Questionnaire.all
     @current_questionnaire = nil
 
-    puts "###"
-    puts "### DEBUG" + params.to_s
-    puts "### questionnaires.size = " + (@questionnaires ? @questionnaires.size.to_s : "[no questionnaires]")
-    puts "###"
-
     if @questionnaires.size == 0
       flash.notice = {
         alert_class: :warning,
@@ -69,11 +64,6 @@ class JobPostingsController < ApplicationController
   # PATCH/PUT /job_postings/1
   # PATCH/PUT /job_postings/1.json
   def update
-    puts "###"
-    puts "### DEBUG" + params.to_s
-    puts "### job_posting_params = " + job_posting_params.to_s
-    puts "###"
-
     if @job_posting.update(job_posting_params)
       flash.notice = {
         alert_class: :success,
@@ -87,11 +77,6 @@ class JobPostingsController < ApplicationController
 
   # POST /job_postings/1/set_candidates
   def set_candidates
-    puts "###"
-    puts "### DEBUG" + params.to_s
-    puts "### candidates_params = " + (candidates_params ? candidates_params.to_s : "[no candidates]")
-    puts "###"
-    
     candidate_ids = []
     if candidates_params
       candidates_params.each do |candidate_id|
