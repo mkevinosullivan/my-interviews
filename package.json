@@ -6,10 +6,19 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "^4.2.0",
+    "acorn": "^6.4.1",
     "bootstrap": "^4.4.1",
+    "dot-prop": "^4.2.1",
+    "elliptic": "^6.5.3",
+    "http-proxy": "^1.18.1",
+    "lodash": "^4.17.19",
+    "node-forge": "^0.10.0",
+    "node-sass": "^4.13.1",
     "jquery": "^3.5.0",
     "popper.js": "^1.16.0",
-    "turbolinks": "^5.2.0"
+    "serialize-javascript": "^3.1.0",
+    "turbolinks": "^5.2.0",
+    "websocket-extensions": "^0.1.4"
   },
   "version": "0.1.0",
   "devDependencies": {
