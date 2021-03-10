@@ -9,7 +9,7 @@
     "acorn": "^6.4.1",
     "bootstrap": "^4.4.1",
     "dot-prop": "^4.2.1",
-    "elliptic": "^6.5.3",
+    "elliptic": "^6.5.4",
     "http-proxy": "^1.18.1",
     "jquery": "^3.5.0",
     "kind-of": "^6.0.3",
